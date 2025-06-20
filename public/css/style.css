@@ -116,7 +116,10 @@ a:not(nav a) {
 }
 
 .main-content {
-    margin: 4rem auto 0 auto;
+    flex: 1 1 0%;
+    min-width: 0;
+    margin: 4rem 4vw 0 4vw;
+    max-width: 900px;
 }
 
 .intro {
@@ -171,8 +174,9 @@ footer {
 
 /* Markdown content styling */
 .markdown-content {
-    max-width: 130ch;
-    margin: 0 auto;
+    max-width: 200ch;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .markdown-content h1,
@@ -321,11 +325,11 @@ footer {
 }
 
 .generated-page .main-content {
-    width: 45%;
-    max-width: none;
-    display: block;
+    width: 100%;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    display: block;
     position: relative;
     min-height: 100vh;
 }
@@ -397,8 +401,8 @@ footer {
     position: static;
     transform: none;
 }
-.generated-page .markdown-content h1 + * {
-    margin-top: 4rem;
+.generated-page .markdown-content h1:first-of-type + * {
+    margin-top: 6rem;
 }
 
 .footnote-popup {
