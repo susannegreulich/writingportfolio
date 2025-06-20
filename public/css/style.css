@@ -467,6 +467,13 @@ footer {
     color: var(--primary-bg, #0C001F);
 }
 
+.toc-sidebar a.active {
+    background: rgba(90,204,117,0.18);
+    color: var(--accent, #5ACC75);
+    font-weight: bold;
+    box-shadow: none;
+}
+
 .main-content {
     flex: 1 1 0%;
     min-width: 0;

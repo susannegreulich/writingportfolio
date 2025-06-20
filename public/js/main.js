@@ -56,4 +56,37 @@ document.addEventListener('DOMContentLoaded', function() {
             createFootnotePopup();
         });
     });
+
+    // TOC highlight logic
+    var tocLinks = document.querySelectorAll('.toc-sidebar a[href^="#"]');
+    var headingAnchors = Array.from(tocLinks).map(function(link) {
+        var id = link.getAttribute('href').slice(1);
+        return document.getElementById(id) || document.querySelector('[id="' + id + '"]');
+    });
+
+    function highlightCurrentTOC() {
+        var scrollPosition = window.scrollY || window.pageYOffset;
+        var offset = 80; // Offset for header, adjust as needed
+        var currentIndex = -1;
+        for (var i = 0; i < headingAnchors.length; i++) {
+            var anchor = headingAnchors[i];
+            if (anchor) {
+                var top = anchor.getBoundingClientRect().top + window.scrollY - offset;
+                if (scrollPosition >= top) {
+                    currentIndex = i;
+                }
+            }
+        }
+        tocLinks.forEach(function(link, idx) {
+            if (idx === currentIndex) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+    if (tocLinks.length > 0) {
+        window.addEventListener('scroll', highlightCurrentTOC);
+        highlightCurrentTOC(); // Initial check
+    }
 }); 
