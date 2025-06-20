@@ -18,7 +18,7 @@ for ext in md odt pdf; do
     mkdir -p "$(dirname "$out_path")"
     # Extract filename without extension for title
     title="$(basename "${rel_path%.*}")"
-    pandoc "$src" --template=template.html --metadata title="$title" -o "$out_path"
+    pandoc "$src" --template=template.html --metadata title="$title" --toc -o "$out_path"
     echo "Converted $src -> $out_path"
   done
 done 
