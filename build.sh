@@ -16,10 +16,9 @@ for ext in md odt pdf; do
     out_path="public/${rel_path%.*}.html"
     # Create the output directory if it doesn't exist
     mkdir -p "$(dirname "$out_path")"
-    pandoc "$src" -o "$out_path"
+    # Extract filename without extension for title
+    title="$(basename "${rel_path%.*}")"
+    pandoc "$src" --template=template.html --metadata title="$title" -o "$out_path"
     echo "Converted $src -> $out_path"
-    # Delete the original source file
-    rm "$src"
-    echo "Deleted source file $src"
   done
 done 

@@ -90,11 +90,32 @@ a:not(nav a) {
     }
 }
 
-.main-content {
+/* Page-specific main-content widths and display */
+.landing-page .main-content {
+    max-width: 700px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    max-width: 900px;
+}
+.articles-page .main-content {
+    width: 33%;
+    max-width: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.articles-page .main-content > * {
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+.notes-page .main-content {
+    width: 50%;
+    max-width: none;
+    display: block;
+}
+
+.main-content {
     margin: 4rem auto 0 auto;
 }
 
@@ -150,7 +171,7 @@ footer {
 
 /* Markdown content styling */
 .markdown-content {
-    max-width: 65ch;
+    max-width: 130ch;
     margin: 0 auto;
 }
 
@@ -297,4 +318,74 @@ footer {
     .articles-title h1 {
         font-size: 2rem;
     }
+}
+
+.generated-page .main-content {
+    width: 45%;
+    max-width: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    min-height: 100vh;
+}
+.generated-page .main-content > * {
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+/* Remove .site-title special styling for generated pages */
+.generated-page .site-title {
+    font-size: inherit;
+    font-weight: 600;
+    color: #5ACC75 !important;
+    margin-right: 0;
+    padding-left: 2rem;
+    text-decoration: none !important;
+}
+.generated-page .header-container a {
+    color: #5ACC75 !important;
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: color 0.2s;
+    padding-left: 2rem;
+}
+.generated-page .header-container a:first-child {
+    padding-left: 0;
+}
+.generated-page .header-container a:hover {
+    color: #d6b4fc !important;
+}
+
+.generated-page .markdown-content {
+    /* margin-top removed for better h1 centering */
+}
+.generated-page .markdown-content > :not(h1) {
+    opacity: 0.2;
+    transition: opacity 0.6s;
+}
+.generated-page .markdown-content.faded-in > :not(h1) {
+    opacity: 1;
+}
+.generated-page .markdown-content h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--heading);
+    margin-top: 35vh;
+    margin-bottom: 3.5rem;
+    width: auto;
+    max-width: 100vw;
+    text-align: center;
+    display: block;
+    opacity: 1;
+    position: static;
+    transform: translateY(-50%);
+    pointer-events: auto;
+    background: none;
+    z-index: auto;
+}
+.generated-page .markdown-content h1 + * {
+    margin-top: 4rem;
 } 
