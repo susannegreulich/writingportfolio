@@ -1,0 +1,20 @@
+
+
+'settings' files, ie files that aren't new posts to be added, but rather timeless enduring settings that apply to
+these posts, should be added directly to the public folder, and not included in the build process. the build process
+should only apply to content that you ADD to your website over time. redundant to re-convert the same default settings
+to html every time. Examples of such default settings pages are:
+- landing page, it is customized and 'timeless'. so directly as html in public folder.
+- css formatting
+
+
+configure build.sh in a way that organizes the converted source files in the public folder in the same way as the source folder.
+so for example when converting source/articles/equalityofopportunity.md, the converted file should be placed in public/articles/equalityofopportunity.html . 
+
+
+also configure to delete the original source files once converted to html, and to KEEP ALL converted html files even
+after the source files are deleted. This way, every build only builds the new content, and doesn't need to re-convert old
+content. 
+
+
+but how do i serve this website online, when packages like pandoc and python are being used?
