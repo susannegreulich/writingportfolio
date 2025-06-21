@@ -488,7 +488,6 @@ footer {
 
 .toc-sidebar {
     height: max-content;
-    max-height: 90vh;
     overflow-y: auto;
     background: var(--secondary-bg, #180D2A);
     border-radius: 10px;
@@ -507,13 +506,16 @@ footer {
 @media (min-width: 901px) {
     .toc-sidebar {
         position: fixed;
-        top: 2rem;
-        left: 2rem;
-        width: 280px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 350px;
+        margin: 0;
+        border-radius: 0;
     }
 
     .main-content {
-        margin-left: 320px; /* 280px width + 40px gap */
+        margin-left: 370px; /* 350px width + 20px gap */
     }
 }
 
@@ -527,6 +529,7 @@ footer {
         position: static;
         width: auto;
         margin: 1rem;
+        max-height: none; /* Remove height constraint on mobile */
    }
 }
 
