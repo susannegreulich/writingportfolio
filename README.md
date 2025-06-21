@@ -18,3 +18,7 @@ content.
 
 
 but how do i serve this website online, when packages like pandoc and python are being used?
+
+tested. this workflow keeps old htmls when generating new ones. ie i don't have to keep the source files for EVERY desired html file, 
+and reconvert everytime. i can just delete old source files, and add new source files and convert only these to html, adding to the
+existing stock of htmls. 
