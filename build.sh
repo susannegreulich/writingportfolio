@@ -17,6 +17,16 @@ for ext in md odt pdf docx; do
     # Create the output directory if it doesn't exist
     mkdir -p "$(dirname "$out_path")"
     
+    # Calculate relative path to the root of the 'public' directory
+    # This is needed for links to CSS, JS, etc. to work from nested pages.
+    rel_path_no_ext="${rel_path%.*}"
+    # Count the number of slashes to determine directory depth
+    depth=$(echo "$rel_path_no_ext" | grep -o "/" | wc -l || true)
+    path_to_root=""
+    for ((i=0; i<depth; i++)); do
+        path_to_root+="../"
+    done
+
     # Extract the first heading from the document to use as title
     # Convert to markdown and take the first line as the title
     first_heading=$(pandoc "$src" --to=markdown | head -1)
@@ -29,8 +39,8 @@ for ext in md odt pdf docx; do
         title="$(basename "${rel_path%.*}")"
     fi
     
-    # Convert to HTML with the extracted title
-    pandoc "$src" --template=template.html --metadata title="$title" --toc -o "$out_path"
+    # Convert to HTML with the extracted title and correct path to root
+    pandoc "$src" --template=template.html --metadata title="$title" --toc --variable="path-to-root:${path_to_root}" -o "$out_path"
     echo "Converted $src -> $out_path (Title: $title)"
   done
 done
