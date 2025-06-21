@@ -76,13 +76,16 @@ EOF
 
 # Create a temporary file to store title-filename pairs
 TEMP_FILE=$(mktemp)
+# Create a temporary pandoc template to extract titles
+TITLE_TPL=$(mktemp)
+echo '$title$' > "$TITLE_TPL"
 
 # Extract titles and filenames, then sort by title
 find "$WRITINGS_DIR" -maxdepth 1 -name "*.html" -not -name "index.html" | while read -r file; do
     fname=$(basename "$file")
     
-    # Use a highly robust awk command to extract the title, handling multi-line cases
-    title=$(awk -v RS='</title>' -v FS='<title>' 'NF>1{print $2; exit}' "$file" | sed 's/&#8288;/ /g')
+    # Use pandoc to reliably extract the title from the HTML file
+    title=$(pandoc "$file" --template="$TITLE_TPL" | sed 's/&#8288;/ /g')
     
     # If title extraction failed, fall back to filename
     if [ -z "$title" ]; then
@@ -92,6 +95,9 @@ find "$WRITINGS_DIR" -maxdepth 1 -name "*.html" -not -name "index.html" | while 
     # Store title and filename in temp file
     echo "$title|$fname" >> "$TEMP_FILE"
 done
+
+# Clean up the temporary template
+rm "$TITLE_TPL"
 
 # Sort by title and generate HTML
 if [ -f "$TEMP_FILE" ]; then
