@@ -488,8 +488,7 @@ footer {
     position: sticky;
     top: 2rem;
     align-self: flex-start;
-    min-width: 220px;
-    max-width: 350px;
+    width: 400px;
     height: max-content;
     max-height: 90vh;
     overflow-y: auto;
