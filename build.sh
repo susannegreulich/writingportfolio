@@ -46,12 +46,12 @@ cat > "$INDEX_FILE" <<EOF
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Writings</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="articles-page">
     <header>
         <div class="articles-topbar">
-            <a href="/index.html" class="site-title">Home</a>
+            <a href="../index.html" class="site-title">Home</a>
             <nav class="articles-nav"></nav>
         </div>
         <div class="articles-title">
