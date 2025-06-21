@@ -22,9 +22,9 @@ for ext in md odt pdf docx; do
     rel_path_no_ext="${rel_path%.*}"
     # Count the number of slashes to determine directory depth
     depth=$(echo "$rel_path_no_ext" | grep -o "/" | wc -l || true)
-    path_to_root=""
+    pathtoroot=""
     for ((i=0; i<depth; i++)); do
-        path_to_root+="../"
+        pathtoroot+="../"
     done
 
     # Extract the first heading from the document to use as title
@@ -40,7 +40,7 @@ for ext in md odt pdf docx; do
     fi
     
     # Convert to HTML with the extracted title and correct path to root
-    pandoc "$src" --template=template.html --metadata title="$title" --toc --variable="path-to-root:${path_to_root}" -o "$out_path"
+    pandoc "$src" --template=template.html --metadata title="$title" --toc --variable="pathtoroot:${pathtoroot}" -o "$out_path"
     echo "Converted $src -> $out_path (Title: $title)"
   done
 done
