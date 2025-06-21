@@ -85,7 +85,8 @@ find "$WRITINGS_DIR" -maxdepth 1 -name "*.html" -not -name "index.html" | while 
     fname=$(basename "$file")
     
     # Use pandoc to reliably extract the title from the HTML file
-    title=$(pandoc "$file" --template="$TITLE_TPL" | sed 's/&#8288;/ /g')
+    # and then remove newlines to handle multi-line titles
+    title=$(pandoc "$file" --template="$TITLE_TPL" | tr '\n' ' ' | sed 's/&#8288;/ /g')
     
     # If title extraction failed, fall back to filename
     if [ -z "$title" ]; then
