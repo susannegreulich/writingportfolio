@@ -283,6 +283,27 @@ footer {
     .articles-header .header-center h1 {
         font-size: 2rem;
     }
+    /* Make articles page use full width on mobile */
+    .articles-page .main-content {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0 5vw;
+    }
+    /* Ensure article links take full width */
+    .articles-page .main-content ul {
+        width: 100%;
+    }
+    .articles-page .main-content li {
+        width: 100%;
+    }
+    .articles-page .main-content a {
+        display: block;
+        width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
 }
 
 /* Articles page top bar and title */
