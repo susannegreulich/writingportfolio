@@ -20,8 +20,9 @@ for ext in md odt pdf docx; do
     # Calculate relative path to the root of the 'public' directory
     # This is needed for links to CSS, JS, etc. to work from nested pages.
     rel_path_no_ext="${rel_path%.*}"
-    # Count the number of slashes to determine directory depth
-    depth=$(echo "$rel_path_no_ext" | grep -o "/" | wc -l || true)
+    # A more robust way to count slashes to determine directory depth
+    temp=${rel_path_no_ext//[^\/]/}
+    depth=${#temp}
     pathtoroot=""
     for ((i=0; i<depth; i++)); do
         pathtoroot+="../"
