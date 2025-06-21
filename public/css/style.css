@@ -400,19 +400,49 @@ footer {
     padding-left: 2rem;
     text-decoration: none !important;
 }
+
+/* Ensure articles-page has the same header styling as generated pages */
+.articles-page .site-title {
+    font-size: inherit;
+    font-weight: 600;
+    color: #5ACC75 !important;
+    margin-right: 0;
+    padding-left: 2rem;
+    text-decoration: none !important;
+}
+
 .generated-page .header-container a {
     color: #5ACC75 !important;
     font-size: 1.35rem;
     font-weight: 600;
     text-decoration: none !important;
     transition: color 0.2s;
-    padding-left: 2rem;
 }
+
+.articles-page .header-container a {
+    color: #5ACC75 !important;
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: color 0.2s;
+}
+
 .generated-page .header-container a:first-child {
     padding-left: 0;
 }
+
+.articles-page .header-container a:first-child {
+    padding-left: 0;
+}
+
 .generated-page .header-container a:hover {
     color: #d6b4fc !important;
+    text-decoration: none !important;
+}
+
+.articles-page .header-container a:hover {
+    color: #d6b4fc !important;
+    text-decoration: none !important;
 }
 
 .generated-page .markdown-content {

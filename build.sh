@@ -61,9 +61,10 @@ cat > "$INDEX_FILE" <<EOF
 </head>
 <body class="articles-page">
     <header>
-        <div class="articles-topbar">
-            <a href="../index.html" class="site-title">Home</a>
-            <nav class="articles-nav"></nav>
+        <div class="header-container">
+            <nav>
+                <a href="../index.html" class="site-title">Home</a>
+            </nav>
         </div>
         <div class="articles-title">
             <h1>Writings</h1>
