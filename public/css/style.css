@@ -478,6 +478,8 @@ footer {
     word-break: break-word;
 }
 
+/* --- Generated Page Layout --- */
+
 .layout-container {
     display: flex;
     flex-direction: row;
@@ -485,20 +487,47 @@ footer {
 }
 
 .toc-sidebar {
-    position: sticky;
-    top: 2rem;
-    align-self: flex-start;
-    width: 400px;
     height: max-content;
     max-height: 90vh;
     overflow-y: auto;
     background: var(--secondary-bg, #180D2A);
     border-radius: 10px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-    margin: 2rem 2.5rem 2rem 0;
     padding: 1.2rem 1rem;
     font-size: 1rem;
     z-index: 100;
+}
+
+.main-content {
+    flex: 1 1 0%;
+    min-width: 0;
+}
+
+/* For wide screens, fix the TOC to the side */
+@media (min-width: 901px) {
+    .toc-sidebar {
+        position: fixed;
+        top: 2rem;
+        left: 2rem;
+        width: 280px;
+    }
+
+    .main-content {
+        margin-left: 320px; /* 280px width + 40px gap */
+    }
+}
+
+/* For narrow screens, stack the layout vertically */
+@media (max-width: 900px) {
+    .layout-container {
+        flex-direction: column;
+    }
+
+    .toc-sidebar {
+        position: static;
+        width: auto;
+        margin: 1rem;
+   }
 }
 
 .toc-sidebar nav, .toc-sidebar ul, .toc-sidebar ol {
@@ -529,27 +558,11 @@ footer {
     box-shadow: none;
 }
 
-.main-content {
-    flex: 1 1 0%;
-    min-width: 0;
-}
-
-@media (max-width: 900px) {
-    .layout-container {
-        flex-direction: column;
-    }
-    .toc-sidebar {
-        position: static;
-        max-width: 100%;
-        margin: 1rem 0;
-        width: 100%;
-    }
-}
-
 .toc-sidebar ul ul {
     margin-left: 1.2em;
     border-left: 2px solid var(--accent, #5ACC75);
     padding-left: 0.8em;
+    overflow-wrap: break-word;
 }
 .toc-sidebar ul ul ul {
     margin-left: 1.2em;
@@ -586,6 +599,12 @@ main {
 .markdown-content h5,
 .markdown-content h6,
 .markdown-content li,
+.markdown-content blockquote {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
 .markdown-content blockquote {
     max-width: 100%;
     word-wrap: break-word;
