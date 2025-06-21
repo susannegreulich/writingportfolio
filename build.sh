@@ -81,8 +81,8 @@ TEMP_FILE=$(mktemp)
 find "$WRITINGS_DIR" -maxdepth 1 -name "*.html" -not -name "index.html" | while read -r file; do
     fname=$(basename "$file")
     
-    # A more robust way to extract the actual title from the HTML file's title tag
-    title=$(sed -n 's/.*<title>\(.*\)<\/title>.*/\1/p' "$file" | sed 's/&#8288;/ /g')
+    # Use a highly robust awk command to extract the title, handling multi-line cases
+    title=$(awk -v RS='</title>' -v FS='<title>' 'NF>1{print $2; exit}' "$file" | sed 's/&#8288;/ /g')
     
     # If title extraction failed, fall back to filename
     if [ -z "$title" ]; then
