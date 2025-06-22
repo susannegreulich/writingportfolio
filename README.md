@@ -1,5 +1,14 @@
 
 
+picture doesn't work. 
+the prince's toc interruption. 
+
+rename headings, ie FIRST h1 as title ok, so next headings
+can use h1, h2 h3...
+
+reconvert source files. but commit first just in case. 
+
+
 'settings' files, ie files that aren't new posts to be added, but rather timeless enduring settings that apply to
 these posts, should be added directly to the public folder, and not included in the build process. the build process
 should only apply to content that you ADD to your website over time. redundant to re-convert the same default settings
