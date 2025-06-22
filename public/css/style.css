@@ -652,7 +652,23 @@ main {
 }
 
 .markdown-content blockquote {
-    max-width: 100%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    border-left: 4px solid var(--accent);
+    padding-left: 1rem;
+    margin-left: 0;
+    font-style: italic;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+p {
+    font-size: 1.2rem;
 } 
