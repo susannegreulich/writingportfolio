@@ -5,6 +5,7 @@ set -e
 
 # Create public directory if it doesn't exist
 mkdir -p public
+mkdir -p public/images
 
 # Loop over supported file types
 for ext in md odt pdf docx; do
@@ -40,8 +41,59 @@ for ext in md odt pdf docx; do
         title="$(basename "${rel_path%.*}")"
     fi
     
-    # Convert to HTML with the extracted title and correct path to root
-    pandoc "$src" --template=template.html --metadata title="$title" --toc --variable="pathtoroot:${pathtoroot}" -o "$out_path"
+    # Create a temporary directory for extracted images
+    temp_img_dir=$(mktemp -d)
+    
+    # Convert to HTML with image extraction
+    # --extract-media extracts images to the specified directory
+    # --variable=pathtoroot sets the path to root for CSS/JS links
+    pandoc "$src" \
+        --template=template.html \
+        --metadata title="$title" \
+        --toc \
+        --extract-media="$temp_img_dir" \
+        --variable="pathtoroot:${pathtoroot}" \
+        -o "$out_path"
+    
+    # Move extracted images to public/images and update HTML
+    if [ -d "$temp_img_dir/media" ]; then
+        # Find all image files in the extracted media directory
+        find "$temp_img_dir/media" -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.svg" -o -name "*.webp" \) | while read -r img_file; do
+            # Get the filename
+            img_name=$(basename "$img_file")
+            # Move to public/images
+            mv "$img_file" "public/images/$img_name"
+            
+            # Update the HTML file to reference the correct image path
+            # Replace various possible path formats with the correct relative path
+            sed -i "s|src=\"media/$img_name\"|src=\"${pathtoroot}images/$img_name\"|g" "$out_path"
+            sed -i "s|src=\"$img_name\"|src=\"${pathtoroot}images/$img_name\"|g" "$out_path"
+            # Handle absolute paths to temp directory
+            sed -i "s|src=\"$temp_img_dir/media/$img_name\"|src=\"${pathtoroot}images/$img_name\"|g" "$out_path"
+        done
+    fi
+    
+    # Also check for Pictures directory (common in ODT files)
+    if [ -d "$temp_img_dir/Pictures" ]; then
+        # Find all image files in the extracted Pictures directory
+        find "$temp_img_dir/Pictures" -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.svg" -o -name "*.webp" \) | while read -r img_file; do
+            # Get the filename
+            img_name=$(basename "$img_file")
+            # Move to public/images
+            mv "$img_file" "public/images/$img_name"
+            
+            # Update the HTML file to reference the correct image path
+            # Replace various possible path formats with the correct relative path
+            sed -i "s|src=\"Pictures/$img_name\"|src=\"${pathtoroot}images/$img_name\"|g" "$out_path"
+            sed -i "s|src=\"$img_name\"|src=\"${pathtoroot}images/$img_name\"|g" "$out_path"
+            # Handle absolute paths to temp directory
+            sed -i "s|src=\"$temp_img_dir/Pictures/$img_name\"|src=\"${pathtoroot}images/$img_name\"|g" "$out_path"
+        done
+    fi
+    
+    # Clean up temporary directory
+    rm -rf "$temp_img_dir"
+    
     echo "Converted $src -> $out_path (Title: $title)"
   done
 done
