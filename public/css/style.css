@@ -317,7 +317,7 @@ footer {
     .articles-page .main-content li {
         width: 100%;
     }
-    .articles-page .main-content a {
+    .articles-page .main-content a:not(.intro a) {
         display: block;
         width: 100%;
         word-wrap: break-word;
@@ -670,5 +670,15 @@ h1 {
 }
 
 p {
-    font-size: 1.2rem;
-} 
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+.intro p a {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-align: inherit;
+    font-weight: inherit;
+}

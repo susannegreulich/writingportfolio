@@ -1,13 +1,57 @@
+A static website generator that converts academic documents (ODT, DOCX, PDF, MD) to HTML using Pandoc, creating a clean, responsive writing portfolio.
+
+## Overview
+
+This project automatically converts source documents in the `source/` directory to HTML files in the `public/` directory, maintaining the original folder structure. It's designed for efficient content management - once documents are converted, source files can be deleted while keeping the generated HTML files.
+
+## Features
+
+- **Multi-format Support**: Converts ODT, DOCX, PDF, and Markdown files to HTML
+- **Automatic Image Extraction**: Extracts and properly links images from documents
+- **Table of Contents**: Generates navigation TOC for each document
+- **Responsive Design**: Clean, modern styling with mobile-friendly layout
+- **Incremental Builds**: Only converts new/changed files, preserving existing HTML
+- **Auto-generated Index**: Creates an alphabetically sorted index of all writings
+
+## Structure
+
+```
+Site_Pandoc/
+├── source/          # Source documents (ODT, DOCX, PDF, MD)
+├── public/          # Generated HTML website
+├── template.html    # HTML template for converted documents
+└── build.sh         # Build script
+```
+
+## Usage
+
+1. Place your source documents in the `source/` directory (maintain subdirectories as needed)
+2. Run the build script:
+   ```bash
+   ./build.sh
+   ```
+3. The generated website will be in the `public/` directory
+4. Serve the `public/` directory with any web server
+
+## Requirements
+
+- Pandoc
+- Bash shell
+- Standard Unix tools (find, sed, etc.)
+
+## Deployment
+
+The `public/` directory contains a complete static website that can be deployed to any web hosting service (GitHub Pages, Netlify, Vercel, etc.).
 
 
-picture doesn't work. 
-the prince's toc interruption. 
 
-rename headings, ie FIRST h1 as title ok, so next headings
-can use h1, h2 h3...
 
-reconvert source files. but commit first just in case. 
 
+
+
+
+
+My notes to self on efficient build:
 
 'settings' files, ie files that aren't new posts to be added, but rather timeless enduring settings that apply to
 these posts, should be added directly to the public folder, and not included in the build process. the build process
