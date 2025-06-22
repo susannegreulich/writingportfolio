@@ -571,8 +571,8 @@ footer {
         position: static;
         width: auto;
         margin: 1rem;
-        max-height: 50vh; /* Limit height on mobile to allow scrolling */
-        overflow-y: auto; /* Enable vertical scrolling on mobile */
+        max-height: none; /* Remove height constraint on mobile */
+        overflow-y: visible; /* Allow full content to be visible */
     }
 }
 
