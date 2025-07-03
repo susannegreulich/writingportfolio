@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$title$</title>
+    <title>greulich.dk</title>
+    <script>
+      // Redirect www and http to https://greulich.dk
+      (function() {
+        var host = window.location.hostname;
+        var protocol = window.location.protocol;
+        var path = window.location.pathname + window.location.search + window.location.hash;
+        if (host === 'www.greulich.dk' || protocol !== 'https:') {
+          window.location.href = 'https://greulich.dk' + path;
+        }
+      })();
+    </script>
     <link rel="stylesheet" href="$pathtoroot$css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
